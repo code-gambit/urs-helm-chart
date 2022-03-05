@@ -1,0 +1,38 @@
+{{- if .Values.connector_main.enabled -}}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.connector_main.name }}
+  labels:
+    app: {{ .Values.connector_main.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.connector_main.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.connector_main.name }}
+      annotations:
+        deployTime: "{{ .Values.deployTime }}"
+    spec:
+      containers:
+        - name: ph-ee-connector-mpesa
+          image: "{{ .Values.connector_main.image }}"
+          ports:
+            - containerPort: 8085
+          imagePullPolicy: {{ .Values.common.image_pull_policy }}
+          resources:
+            limits:
+              memory: "{{ .Values.common.memory.microservices }}"  
+          env:
+            - name: "SPRING_DATA_CASSANDRA_KEYSPACE-NAME"
+              value: "{{ .Values.connector_main.cassandra.keyspace_name }}"
+            - name: "SPRING_DATA_CASSANDRA_CONTACT_POINTS"
+              value: "{{ .Values.connector_main.cassandra.contact_point }}"
+            - name: "SPRING_DATA_CASSANDRA_PORT"
+              value: "{{ .Values.connector_main.cassandra.port }}" 
+
+{{- end }}

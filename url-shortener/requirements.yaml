@@ -1,0 +1,9 @@
+dependencies:
+  - name: cassandra
+    repository: https://charts.bitnami.com/bitnami
+    version: 9.1.3
+    condition: cassandra.enabled
+  - name: zookeeper
+    repository: https://charts.bitnami.com/bitnami
+    version: 8.1.1
+    condition: zookeeper.enabled
