@@ -5,7 +5,7 @@
 connector_main:
   enabled: true
   name: connector-main
-  image: ""
+  image: "codegb/urs-connector-main"
   cassandra:
     keyspace_name: ""
     contact_point: 0.0.0.0

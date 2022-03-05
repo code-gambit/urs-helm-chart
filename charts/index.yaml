@@ -3,7 +3,7 @@ entries:
   url-shortener:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-03-05T22:57:23.771138+05:30"
+    created: "2022-03-05T23:22:58.950912+05:30"
     dependencies:
     - condition: cassandra.enabled
       name: cassandra
@@ -14,10 +14,10 @@ entries:
       repository: https://charts.bitnami.com/bitnami
       version: 8.1.1
     description: A Helm chart for URL shortener
-    digest: c3ac3aea7f78cbb6b28729c1fe2f904fc01fc890457cbfef8dbe42d79c808d78
+    digest: e979c885964cfc0b21e9e20030ba7263d957f402f879142bcf6587364900cbf4
     name: url-shortener
     type: application
     urls:
     - url-shortener-0.1.0.tgz
     version: 0.1.0
-generated: "2022-03-05T22:57:23.764236+05:30"
+generated: "2022-03-05T23:22:58.944746+05:30"
