@@ -10,6 +10,11 @@ connector_main:
     keyspace_name: ""
     contact_point: 0.0.0.0
     port: 9042
+    username: ""
+    local_datacenter: ""
+  secret:
+    name: connector-main-secret
+    cassandra_password: password
 
 common:
   image_pull_policy: Always
