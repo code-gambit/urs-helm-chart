@@ -34,7 +34,7 @@ spec:
               value: {{ .Values.connector_main.cassandra.contact_point }}
             - name: "SPRING_DATA_CASSANDRA_PORT"
               value: {{ .Values.connector_main.cassandra.port }}
-            - namr: "SPRING_DATA_CASSANDRA_USERNAME"
+            - name: "SPRING_DATA_CASSANDRA_USERNAME"
               value: {{ .Values.connector_main.cassandra.username }}
             - name: "SPRING_DATA_CASSANDRA_LOCAL-DATACENTER"
               value: {{ .Values.connector_main.cassandra.local_datacenter }} 
