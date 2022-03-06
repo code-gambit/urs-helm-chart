@@ -29,15 +29,15 @@ spec:
               memory: {{ .Values.common.memory.microservices }} 
           env:
             - name: "SPRING_DATA_CASSANDRA_KEYSPACE-NAME"
-              value: {{ .Values.connector_main.cassandra.keyspace_name }}
+              value: "{{ .Values.connector_main.cassandra.keyspace_name }}"
             - name: "SPRING_DATA_CASSANDRA_CONTACT_POINTS"
-              value: {{ .Values.connector_main.cassandra.contact_point }}
+              value: "{{ .Values.connector_main.cassandra.contact_point }}"
             - name: "SPRING_DATA_CASSANDRA_PORT"
-              value: {{ .Values.connector_main.cassandra.port }}
+              value: "{{ .Values.connector_main.cassandra.port }}"
             - name: "SPRING_DATA_CASSANDRA_USERNAME"
-              value: {{ .Values.connector_main.cassandra.username }}
+              value: "{{ .Values.connector_main.cassandra.username }}"
             - name: "SPRING_DATA_CASSANDRA_LOCAL-DATACENTER"
-              value: {{ .Values.connector_main.cassandra.local_datacenter }} 
+              value: "{{ .Values.connector_main.cassandra.local_datacenter }}" 
             - name: "SPRING_DATA_CASSANDRA_PASSWORD"
               valueFrom:
                 secretKeyRef:
