@@ -6,15 +6,31 @@ connector_main:
   enabled: true
   name: connector-main
   image: "codegb/urs-connector-main"
+  root:
+    port: 8080
   cassandra:
     keyspace_name: ""
-    contact_point: 0.0.0.0
+    contact_point: 127.0.0.1
     port: 9042
     username: ""
     local_datacenter: ""
+  datasource:
+    url: ""
+    username: ""
+    console:
+      enabled: true
+  zookeeper:
+    host: 127.0.0.1
+    port: 2181
+    range:
+      limit: 1000000
+    znode:
+      path:
+        counter: "/counter"
   secret:
     name: connector-main-secret
     cassandra_password: password
+    datasource_password: password
 
 common:
   image_pull_policy: Always

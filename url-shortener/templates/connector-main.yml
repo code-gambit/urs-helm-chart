@@ -28,6 +28,8 @@ spec:
             limits:
               memory: {{ .Values.common.memory.microservices }} 
           env:
+            - name: "SERVER_PORT"
+              value: "{{ .Values.connector_main.root.port }}"
             - name: "SPRING_DATA_CASSANDRA_KEYSPACE-NAME"
               value: "{{ .Values.connector_main.cassandra.keyspace_name }}"
             - name: "SPRING_DATA_CASSANDRA_CONTACT_POINTS"
@@ -37,7 +39,26 @@ spec:
             - name: "SPRING_DATA_CASSANDRA_USERNAME"
               value: "{{ .Values.connector_main.cassandra.username }}"
             - name: "SPRING_DATA_CASSANDRA_LOCAL-DATACENTER"
-              value: "{{ .Values.connector_main.cassandra.local_datacenter }}" 
+              value: "{{ .Values.connector_main.cassandra.local_datacenter }}"
+            - name: "H2_CONSOLE_ENABLED"
+              value: "{{ .Values.connector_main.datasource.console.enabled }}" 
+            - name: "SPRING_DATASOURCE_URL"
+              value: "{{ .Values.connector_main.datasource.url }}" 
+            - name: "SPRING_DATASOURCE_USERNAME"
+              value: "{{ .Values.connector_main.datasource.username }}"
+            - name: "ZOOKEEPER_HOST"
+              value: "{{ .Values.connector_main.zookeeper.host }}"
+            - name: "ZOOKEEPER_PORT"
+              value: "{{ .Values.connector_main.zookeeper.port }}"
+            - name: "ZOOKEEPER_RANGE_LIMIT"
+              value: "{{ .Values.connector_main.zookeeper.range.limit }}"
+            - name: "ZOOKEEPER_ZNODE_PATH_COUNTER"
+              value: "{{ .Values.connector_main.zookeeper.znode.path.counter }}"
+            - name: "SPRING_DATASOURCE_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.connector_main.secret.name }}
+                  key: "datasource_password"
             - name: "SPRING_DATA_CASSANDRA_PASSWORD"
               valueFrom:
                 secretKeyRef:
@@ -51,5 +72,5 @@ metadata:
 type: Opaque
 data:
   cassandra_password: {{ .Values.connector_main.secret.cassandra_password | b64enc }}
-
+  datasource_password: {{ .Values.connector_main.secret.datasource_password }}
 {{- end }}
