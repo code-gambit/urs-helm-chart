@@ -4,3 +4,4 @@
 # helm
 url-shortener/charts/
 Chart.lock
+.idea
