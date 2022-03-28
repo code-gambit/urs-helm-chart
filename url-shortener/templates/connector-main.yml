@@ -19,7 +19,7 @@ spec:
         deployTime: "{{ .Values.deployTime }}"
     spec:
       containers:
-        - name: ph-ee-connector-mpesa
+        - name: connector-main
           image: "{{ .Values.connector_main.image }}"
           ports:
             - containerPort: 8085
@@ -27,14 +27,22 @@ spec:
           resources:
             limits:
               memory: {{ .Values.common.memory.microservices }} 
+          {{- if .Values.connector_main.livenessProbe.enabled }}
           livenessProbe:
-{{- if .Values.connector_main.livenessProbe.enabled -}}
-{{ toYaml .Values.connector_main.livenessProbe | indent 12 }}
-{{- end }}
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: {{ .Values.connector_main.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.connector_main.livenessProbe.periodSeconds }}
+          {{- end }}
+          {{- if .Values.connector_main.readinessProbe.enabled }}
           readinessProbe:
-{{- if .Values.connector_main.readinessProbe.enabled -}}
-{{ toYaml .Values.connector_main.readinessProbe | indent 12 }}
-{{- end }}
+            httpGet:
+              path: /system/health
+              port: 8080
+            initialDelaySeconds: {{ .Values.connector_main.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.connector_main.readinessProbe.periodSeconds }}
+          {{- end }}
           env:
             - name: "SERVER_PORT"
               value: "{{ .Values.connector_main.root.port }}"
