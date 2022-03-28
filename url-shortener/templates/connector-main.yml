@@ -27,6 +27,14 @@ spec:
           resources:
             limits:
               memory: {{ .Values.common.memory.microservices }} 
+          livenessProbe:
+{{- if .Values.connector_main.livenessProbe.enabled -}}
+{{ toYaml .Values.connector_main.livenessProbe | indent 12 }}
+{{- end }}
+          readinessProbe:
+{{- if .Values.connector_main.readinessProbe.enabled -}}
+{{ toYaml .Values.connector_main.readinessProbe | indent 12 }}
+{{- end }}
           env:
             - name: "SERVER_PORT"
               value: "{{ .Values.connector_main.root.port }}"

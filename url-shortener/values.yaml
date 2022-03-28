@@ -27,6 +27,20 @@ connector_main:
     znode:
       path:
         counter: "/counter"
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    httpGet:
+      path: /health
+      port: 8080
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    httpGet:
+      path: /system/health
+      port: 8080
   secret:
     name: connector-main-secret
     cassandra_password: password
