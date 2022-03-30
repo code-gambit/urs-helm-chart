@@ -3,7 +3,7 @@
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/code-gambit/urs-helm-chart/Helm%20Lint?style=for-the-badge)](https://github.com/code-gambit/urs-helm-chart/actions/workflows/helm_lint.yml) ![Yaml](https://img.shields.io/badge/Yaml-0095D5?&style=for-the-badge&logo=Yaml&logoColor=white) [![GitHub last commit](https://img.shields.io/github/last-commit/code-gambit/urs-helm-chart?style=for-the-badge)](https://github.com/code-gambit/urs-helm-chart/commits/)
 
 ## Project Description
-This is the base helm chart for the URL Shortener application. URL shortener is the simple application which help users to get short url against the long url. It is designed to support the distributed system architecture.  
+This is the base helm chart for the URL Shortener application. URL shortener is the simple application which help users to get short url against the long url. It is designed to support the distributed system architecture.
 
 ## Chart Dependency
 1. [Bitnami/Cassandra](https://artifacthub.io/packages/helm/bitnami/cassandra)
@@ -38,6 +38,7 @@ common.memory.microservices | Memory allocation for the main services | "512M"
 |connector_main.enabled | Boolean value to disable or enable service | true |
 |connector_main.name | String for the service name | "connector-main" |
 |connector_main.image | String value for the image | "codegb/urs-connector-main" |
+|connector_main.root.port | Port at which tomcat server will run | 8080 |
 |connector_main.cassandra.keyspace_name | Cassandra keysapce name | "" |
 |connector_main.cassandra.contact_point |  Conssandra host name or IP | 0.0.0.0 |
 |connector_main.cassandra.port | Cassandra port number for communication | 9042 |
@@ -45,6 +46,21 @@ common.memory.microservices | Memory allocation for the main services | "512M"
 |connector_main.cassandra.local_datacenter | Name of cassandra datacenter | "" |
 |connector_main.secret.name | Name of the secret for vulnerable data  | connector-main-secret |
 |connector_main.secret.cassandra_password | Cassandra db password | "password" |
+|connector_main.secret.datasource_password | H2 db password  | "password" |
+|connector_main.datasource.url | H2 database url | "" |
+|connector_main.datasource.username | H2 database username | "" |
+|connector_main.datasource.console.enabled | Enable console for H2 | true |
+|connector_main.zookeeper.host | Host at which ZooKeeper is running | 127.0.0.1 |
+|connector_main.zookeeper.port | Port at which ZooKeeper is running | 2181 |
+|connector_main.zookeeper.range.limit | The range limit upto which a value is allotted to the service by ZooKeeper | 1000000 |
+|connector_main.zookeeper.znode.path.counter | The Znode path at which counter is stored | "/counter" |
+| connector_main.livenessProbe.enabled | Enable livenessProbe | true |
+| connector_main.livenessProbe.initialDelaySeconds | Initial delay seconds for livenessProbe | 5 |
+| connector_main.livenessProbe.periodSeconds | Period seconds for livenessProbe | 5 |
+| connector_main.readinessProbe.enabled | Enable readinessProbe | true |
+| connector_main.readinessProbe.initialDelaySeconds | Initial delay seconds for readinessProbe | 5 |
+| connector_main.readinessProbe.periodSeconds | Period seconds for readinessProbe | 5 |
+
 
 ## Contributing
 DISCLAIMER: Make sure not to force push untill unavoidable.
