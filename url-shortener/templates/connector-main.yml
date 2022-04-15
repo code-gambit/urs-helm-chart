@@ -22,7 +22,7 @@ spec:
         - name: connector-main
           image: "{{ .Values.connector_main.image }}"
           ports:
-            - containerPort: 8085
+            - containerPort: 8080
           imagePullPolicy: {{ .Values.common.image_pull_policy }}
           resources:
             limits:
